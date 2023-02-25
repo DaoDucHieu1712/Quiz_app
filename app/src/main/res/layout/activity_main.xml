@@ -61,7 +61,7 @@
             <ImageView
                 android:layout_width="99dp"
                 android:layout_height="103dp"
-                android:src="@drawable/java_icon" />
+                android:src="@drawable/java_icon2" />
 
             <TextView
                 android:layout_width="wrap_content"
