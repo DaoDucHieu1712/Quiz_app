@@ -2,10 +2,14 @@ package com.example.myapplication;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
@@ -17,7 +21,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private ViewPager viewPager;
     private TabItem profile, course;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,44 +28,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         initView();
 
-        profile.setOnClickListener(this);
-        course.setOnClickListener(this);
         FragmentManager manager = getSupportFragmentManager();
         FragmentAdapter adapter = new FragmentAdapter(manager, 2);
-
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-
     }
 
     private void initView() {
         tabLayout = findViewById(R.id.tab_layout);
         user_name = findViewById(R.id.user_name);
+        profile = findViewById(R.id.profile);
+        course = findViewById(R.id.course);
         viewPager = findViewById(R.id.view_pager);
     }
 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-
+        switch (view.getId()) {
+            case R.id.profile:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.course:
+                viewPager.setCurrentItem(2);
+                break;
         }
     }
 }
