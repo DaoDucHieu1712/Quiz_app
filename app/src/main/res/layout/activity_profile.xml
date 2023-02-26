@@ -8,7 +8,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/imageView2"
+        android:id="@+id/avt"
         android:layout_width="124dp"
         android:layout_height="101dp"
         android:layout_gravity="center"
