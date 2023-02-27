@@ -1,13 +1,14 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
-public class CreateQuestionActivity extends AppCompatActivity {
+public class CreateCourseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_question);
+        setContentView(R.layout.activity_create_course);
     }
 }
