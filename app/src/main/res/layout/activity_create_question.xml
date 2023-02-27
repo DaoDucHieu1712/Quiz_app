@@ -93,14 +93,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="145dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="145dp"
         android:text="CREATE QUESTION"
         android:textColor="@android:color/holo_blue_dark"
         android:textColorLink="@android:color/holo_blue_dark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.716"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -141,5 +141,19 @@
         android:text="Save"
         tools:layout_editor_absoluteX="271dp"
         tools:layout_editor_absoluteY="575dp" />
+
+    <LinearLayout
+        android:layout_width="365dp"
+        android:layout_height="711dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
