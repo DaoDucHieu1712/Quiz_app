@@ -1,145 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CreateQuestionActivity">
 
-    <RadioButton
-        android:id="@+id/solution4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="op3"
-        app:layout_constraintTop_toBottomOf="@+id/op4"
-        tools:layout_editor_absoluteX="215dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:background="@drawable/blue_bg">
 
-    <RadioButton
-        android:id="@+id/solution3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="op4"
-        app:layout_constraintTop_toBottomOf="@+id/op4"
-        tools:layout_editor_absoluteX="295dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:gravity="center"
+            android:text="CREATE QUESTION"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+    </FrameLayout>
 
     <EditText
-        android:id="@+id/op4"
-        android:layout_width="300dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="264dp"
-        android:ems="10"
-        android:hint="Enter your option 4"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/op3"
-        android:layout_width="300dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="340dp"
-        android:ems="10"
-        android:hint="Enter your option 3"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/op2" />
-
-    <EditText
-        android:id="@+id/op2"
-        android:layout_width="300dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="416dp"
-        android:ems="10"
-        android:hint="Enter your option 2"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/op1" />
-
-    <EditText
-        android:id="@+id/op1"
-        android:layout_width="300dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="496dp"
-        android:ems="10"
-        android:hint="Enter your option 1"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
+        android:id="@+id/title_quiz"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="145dp"
-        android:text="CREATE QUESTION"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textColorLink="@android:color/holo_blue_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:hint="Please enter title quiz ..." />
 
-    <EditText
-        android:id="@+id/quizTitle"
-        android:layout_width="301dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:hint="Enter your title quiz ... "
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="108dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="451dp"
+        android:orientation="vertical">
 
-    <RadioButton
-        android:id="@+id/solution1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="op1"
-        app:layout_constraintTop_toBottomOf="@+id/op4"
-        tools:layout_editor_absoluteX="51dp" />
+        <EditText
+            android:id="@+id/op1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 1 ..." />
 
-    <RadioButton
-        android:id="@+id/solution2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="op2"
-        app:layout_constraintTop_toBottomOf="@+id/op4"
-        tools:layout_editor_absoluteX="133dp" />
+        <EditText
+            android:id="@+id/op2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 2 ..." />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="575dp" />
+        <EditText
+            android:id="@+id/op3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 3 ..." />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/op4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 4 ..." />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/solution1"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:text="option1" />
+
+                <RadioButton
+                    android:id="@+id/solution2"
+                    android:layout_width="99dp"
+                    android:layout_height="wrap_content"
+                    android:text="option2" />
+
+                <RadioButton
+                    android:id="@+id/solution3"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:text="option3" />
+
+                <RadioButton
+                    android:id="@+id/solution4"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:text="option4" />
+            </LinearLayout>
+        </RadioGroup>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="15dp"
+            android:entries="@array/course" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:text="Save" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
