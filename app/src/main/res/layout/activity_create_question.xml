@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateQuestionActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:background="@drawable/blue_bg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:gravity="center"
+            android:text="CREATE QUESTION"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/title_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Please enter title quiz ..." />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="451dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/op1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 1 ..." />
+
+        <EditText
+            android:id="@+id/op2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 2 ..." />
+
+        <EditText
+            android:id="@+id/op3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 3 ..." />
+
+        <EditText
+            android:id="@+id/op4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Please enter option 4 ..." />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/solution1"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:text="option1" />
+
+                <RadioButton
+                    android:id="@+id/solution2"
+                    android:layout_width="99dp"
+                    android:layout_height="wrap_content"
+                    android:text="option2" />
+
+                <RadioButton
+                    android:id="@+id/solution3"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:text="option3" />
+
+                <RadioButton
+                    android:id="@+id/solution4"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:text="option4" />
+            </LinearLayout>
+        </RadioGroup>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="15dp"
+            android:entries="@array/course" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:text="Save" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
