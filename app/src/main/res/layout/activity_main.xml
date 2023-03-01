@@ -4,36 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2B63FF"
+    android:background="#C1DBF1"
     tools:context=".MainActivity">
 
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/imageView"
-        android:layout_width="413dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="73dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:background="@drawable/blue_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/quizlet_icon" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/choose_topic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="277dp"
-        android:text="Field of quiz"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/quiz_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="45dp"
+            android:src="@drawable/quizlet_logo" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/choose_field"-->
+<!--                    android:layout_width="135dp"-->
+<!--                    android:layout_height="39dp"-->
+<!--                    android:layout_marginStart="23dp"-->
+<!--                    android:layout_marginTop="210dp"-->
+<!--                    android:layout_marginEnd="277dp"-->
+<!--                    android:background="@drawable/round_back_purple"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:text="Field of quiz"-->
+<!--                    android:textColor="#FFFFFF"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold|italic"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/quiz_logo" />-->
+    </FrameLayout>
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView"-->
+    <!--        android:layout_width="413dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginBottom="73dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/linearLayout"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:srcCompat="@drawable/quizlet_icon" />-->
 
 
     <LinearLayout
@@ -106,7 +128,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.675">
+        app:layout_constraintVertical_bias="0.597">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,14 +180,13 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="382dp"
         android:layout_height="48dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_back_purple"
         android:text="Start Quiz"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        android:background="@drawable/round_back_purple"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
