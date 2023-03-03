@@ -57,24 +57,26 @@
                 android:textColor="@color/lavender"/>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:id="@+id/uploadTitle"
                 android:background="@drawable/blue_border"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:hint="Enter course title"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
+
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
                 android:id="@+id/uploadDesc"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/blue_border"
-                android:layout_marginTop="20dp"
-                android:padding="16dp"
-                android:hint="Enter description"
                 android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"/>
+                android:hint="Enter description"
+                android:padding="10dp"
+                android:textColor="@color/lavender" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
