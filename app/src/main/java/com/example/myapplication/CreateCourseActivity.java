@@ -109,8 +109,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         CourseModel course = new CourseModel(topic, title, desc, imageURL);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
-        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Course Data").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Course").push()
                 .setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
