@@ -9,6 +9,20 @@ public class User {
     private String image;
     private Date dob;
     private boolean gender;
+    private CourseModel course;
+
+    public User(String username, String pass, String fullName, String image, Date dob, boolean gender, CourseModel course) {
+        this.username = username;
+        this.pass = pass;
+        this.fullName = fullName;
+        this.image = image;
+        this.dob = dob;
+        this.gender = gender;
+        this.course = course;
+    }
+
+    public User() {
+    }
 
     public String getUsername() {
         return username;
@@ -58,15 +72,11 @@ public class User {
         this.gender = gender;
     }
 
-    public User() {
+    public CourseModel getCourse() {
+        return course;
     }
 
-    public User(String username, String pass, String fullName, String image, Date dob, boolean gender) {
-        this.username = username;
-        this.pass = pass;
-        this.fullName = fullName;
-        this.image = image;
-        this.dob = dob;
-        this.gender = gender;
+    public void setCourse(CourseModel course) {
+        this.course = course;
     }
 }

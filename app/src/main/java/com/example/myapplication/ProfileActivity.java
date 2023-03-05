@@ -44,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FragmentManager manager = getSupportFragmentManager();
         FragmentAdapter adapter = new FragmentAdapter(manager, 2);
         viewPager.setAdapter(adapter);
+
     }
 
     private void initView() {
@@ -60,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.avt:
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("User");
-                myRef.push().setValue(new User("vinhlq", "123456", "lam vinh", "meo.jpg", new Date(25/12/2001), true));
+                myRef.push().setValue(new User("vinhlq", "123456", "lam vinh", "meo.jpg", new Date(25/12/2001), true, null));
         }
     }
 
