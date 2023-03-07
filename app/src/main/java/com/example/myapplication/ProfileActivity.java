@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.example.myapplication.model.User;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.Date;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView user_name;
@@ -41,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FragmentManager manager = getSupportFragmentManager();
         FragmentAdapter adapter = new FragmentAdapter(manager, 2);
         viewPager.setAdapter(adapter);
+
     }
 
     private void initView() {
@@ -56,8 +60,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.avt:
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("1").child("test");
-                myRef.push().setValue("Hello, 1!");
+                DatabaseReference myRef = database.getReference("User");
+                myRef.push().setValue(new User("vinhlq", "123456", "lam vinh", "meo.jpg", new Date(25/12/2001), true, null));
         }
     }
 

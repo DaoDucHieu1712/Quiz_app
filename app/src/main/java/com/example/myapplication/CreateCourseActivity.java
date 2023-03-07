@@ -40,6 +40,7 @@ public class CreateCourseActivity extends AppCompatActivity {
     Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_course);
         uploadImage = findViewById(R.id.uploadImage);
@@ -47,6 +48,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         uploadTopic = findViewById(R.id.uploadTopic);
         uploadTitle = findViewById(R.id.uploadTitle);
         saveButton = findViewById(R.id.saveButton);
+
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -103,14 +105,14 @@ public class CreateCourseActivity extends AppCompatActivity {
         });
     }
     public void uploadData(){
+        String idUser = "1";
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();
-        CourseModel course = new CourseModel(topic, title, desc, imageURL);
+        CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
-        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Course Data").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Courses").push()
                 .setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
