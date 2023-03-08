@@ -50,7 +50,7 @@ CourseAdapter adapter;
 
         adapter = new CourseAdapter(ListCourseActivity.this, listCourse);
         courseListRV.setAdapter(adapter);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Course Data");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Courses");
         dialog.show();
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -59,6 +59,7 @@ CourseAdapter adapter;
                 listCourse.clear();
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     CourseModel courseModel = itemSnapshot.getValue(CourseModel.class);
+                    courseModel.setKey(itemSnapshot.getKey());
                     listCourse.add(courseModel);
                 }
                 adapter.notifyDataSetChanged();

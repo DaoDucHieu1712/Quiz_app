@@ -6,6 +6,7 @@ public class CourseModel {
     private String title;
     private String desc;
     private String image;
+    private String key;
 
     public CourseModel(String idUser, String topic, String title, String desc, String image) {
         this.idUser = idUser;
@@ -58,5 +59,11 @@ public class CourseModel {
         this.image = image;
     }
 
+    public String getKey() {
+        return key;
+    }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 }
