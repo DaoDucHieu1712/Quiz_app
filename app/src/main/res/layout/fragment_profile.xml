@@ -9,5 +9,5 @@
         android:layout_height="wrap_content"
         android:text="PROFILE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" android:id="@+id/text"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
