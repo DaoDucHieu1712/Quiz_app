@@ -31,7 +31,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ProfileActivity"
+
 
             android:name=".ProfileActivity"
             android:exported="true">
