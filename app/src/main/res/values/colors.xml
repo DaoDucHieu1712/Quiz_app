@@ -14,5 +14,11 @@
     <color name="blue">#FF03A9F4</color>
     <color name="btnlogin_color">#3CCFCF</color>
 
+    <color name="peach">#FF6F5E</color>
+    <color name="gray">#A0A3B1</color>
+    <color name="edit_text_bg">#F2F3F7</color>
+    <color name="blue_med">#03A9F4</color>
+    <color name="light_blue_med">#89C4DA</color>
+
 
 </resources>
