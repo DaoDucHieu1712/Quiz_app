@@ -49,6 +49,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseViewHolder> {
                 intent.putExtra("Description", courseList.get(holder.getAdapterPosition()).getDesc());
                 intent.putExtra("Title", courseList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("Topic", courseList.get(holder.getAdapterPosition()).getTopic());
+                intent.putExtra("Key", courseList.get(holder.getAdapterPosition()).getKey());
                 context.startActivity(intent);
             }
         });
@@ -72,6 +73,5 @@ class CourseViewHolder extends ViewHolder{
         courseTopic = itemView.findViewById(R.id.courseTopic);
         courseDesc = itemView.findViewById(R.id.courseDesc);
         courseCard = itemView.findViewById(R.id.courseCard);
-
     }
 }
