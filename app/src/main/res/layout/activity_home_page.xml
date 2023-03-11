@@ -8,7 +8,7 @@
     tools:context=".HomePageActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_logo"
         style="@style/titleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,15 +22,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvUsernameHome"
+        android:id="@+id/tv_usernameHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:text="初めまして, User"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/tv_logo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_logo" />
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -40,10 +40,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsernameHome">
+        app:layout_constraintTop_toBottomOf="@+id/tv_usernameHome">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -63,8 +63,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+            app:layout_constraintStart_toStartOf="@+id/tv_select"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -206,7 +206,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvLogout"
+            android:id="@+id/cv_logout"
             android:layout_width="0dp"
             style="@style/cardViewStyle"
             android:layout_height="140dp"
