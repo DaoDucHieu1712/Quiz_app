@@ -12,12 +12,20 @@
         android:layout_height="220dp"
         android:background="@drawable/blue_bg">
 
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_back"/>
+
         <TextView
             android:id="@+id/tv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="35dp"
             android:text="Quizlet"
             android:textColor="@color/white"
             android:textSize="60sp"
@@ -27,7 +35,7 @@
             android:id="@+id/img_createQues"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="35dp"
             android:layout_marginStart="290dp"
             android:src="@drawable/ic_createquestion"/>
 
@@ -35,7 +43,7 @@
             android:id="@+id/tv_createQues"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="110dp"
             android:text="CREATE QUESTION"
             android:textColor="@color/white"
@@ -132,8 +140,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue"
-            android:text="Save" />
+            android:background="#255AC5"
+            android:text="Save"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 
