@@ -9,27 +9,16 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         android:background="@drawable/blue_bg">
 
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="40dp"
             android:layout_height="25dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:src="@drawable/ic_back"/>
-
-        <TextView
-            android:id="@+id/tv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="35dp"
-            android:text="Quizlet"
-            android:textColor="@color/white"
-            android:textSize="60sp"
-            android:textStyle="bold|italic"/>
 
         <ImageView
             android:id="@+id/img_createQues"
@@ -44,11 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="110dp"
-            android:text="CREATE QUESTION"
+            android:layout_marginTop="45dp"
+            android:text="CREATE \nQUESTION"
             android:textColor="@color/white"
-            android:textSize="17dp"
-            android:textStyle="italic"/>
+            android:textSize="37dp"
+            android:textStyle="italic|bold"/>
     </FrameLayout>
 
     <EditText
@@ -67,7 +56,7 @@
             android:id="@+id/op1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="1dp"
             android:hint="Enter option 1"
             android:minHeight="48dp" />
 
@@ -75,7 +64,7 @@
             android:id="@+id/op2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="1dp"
             android:hint="Enter option 2"
             android:minHeight="48dp" />
 
@@ -83,7 +72,7 @@
             android:id="@+id/op3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="1dp"
             android:hint="Enter option 3"
             android:minHeight="48dp" />
 
@@ -91,7 +80,7 @@
             android:id="@+id/op4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="1dp"
             android:hint="Enter option 4"
             android:minHeight="48dp" />
 
@@ -132,12 +121,14 @@
         </RadioGroup>
 
         <Spinner
+            android:id="@+id/course_spinner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="15dp"
             android:entries="@array/course" />
 
         <Button
+            android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#255AC5"
