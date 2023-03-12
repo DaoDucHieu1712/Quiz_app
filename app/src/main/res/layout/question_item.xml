@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:backgroundTint="#efefef"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10px"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_titlequiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to abcxyz qwertryytuyutyutyutyutyuytu ? "
+        />
+
+        <TextView
+            android:id="@+id/txt_op1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A. 1"
+            />
+
+        <TextView
+            android:id="@+id/txt_op2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B. 2"
+            />
+
+        <TextView
+            android:id="@+id/txt_op3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C. 3"
+            />
+        <TextView
+            android:id="@+id/txt_op4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D. 4"
+            />
+
+        <TextView
+            android:id="@+id/txt_solution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soulution : D"
+            />
+
+        <LinearLayout
+            android:layout_width="402dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete" />
+
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
