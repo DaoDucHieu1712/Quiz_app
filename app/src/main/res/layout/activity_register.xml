@@ -61,16 +61,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="20dp"
                 android:hint="Enter your name"
+                android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="16sp"
-                android:drawableLeft="@drawable/ic_baseline_person_24"
-                android:drawablePadding="20dp"
-                android:inputType="textPassword"/>
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,7 +95,7 @@
                 android:textSize="16sp"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="20dp"
-                android:inputType="textPassword"/>
+                android:inputType="text"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -107,7 +107,7 @@
             android:background="@drawable/blue_border_rounded_cornwe">
 
             <EditText
-                android:id="@+id/edt_passworđ"
+                android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -139,7 +139,7 @@
             android:textColor="#FFF"
             android:textSize="16sp"/>
         <TextView
-            android:id="@+id/registerRedirectText"
+            android:id="@+id/loginRedirectText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
