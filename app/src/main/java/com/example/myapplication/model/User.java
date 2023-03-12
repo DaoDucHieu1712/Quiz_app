@@ -21,6 +21,12 @@ public class User {
         this.course = course;
     }
 
+    public User(String username, String pass, String fullName, Date dob) {
+        this.username = username;
+        this.pass = pass;
+        this.fullName = fullName;
+        this.dob = dob;
+    }
     public User() {
     }
 
