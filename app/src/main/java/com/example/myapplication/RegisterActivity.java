@@ -35,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.edt_email);
         dob = findViewById(R.id.edt_email);
         password =findViewById(R.id.edt_password);
+        registerButton = findViewById(R.id.btn_register);
+        loginRediectText = findViewById(R.id.loginRedirectText);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 reference.child(fullName).setValue(user);
 
                 Toast.makeText(RegisterActivity.this, "You have register successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent =new Intent(RegisterActivity.this, Log.class);
+                Intent intent =new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

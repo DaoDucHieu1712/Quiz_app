@@ -61,6 +61,7 @@ CourseAdapter adapter;
                     CourseModel courseModel = itemSnapshot.getValue(CourseModel.class);
                     courseModel.setKey(itemSnapshot.getKey());
                     listCourse.add(courseModel);
+                    System.out.println(itemSnapshot.getKey());
                 }
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
