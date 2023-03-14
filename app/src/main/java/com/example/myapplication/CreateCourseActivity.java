@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.myapplication.model.CourseModel;
+import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -109,7 +111,8 @@ public class CreateCourseActivity extends AppCompatActivity {
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();
-        CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL);
+        ArrayList<QuestionModel> listQuestion = new ArrayList<QuestionModel>();
+        CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL, listQuestion);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
