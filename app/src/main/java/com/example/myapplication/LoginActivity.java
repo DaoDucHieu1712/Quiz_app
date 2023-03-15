@@ -6,6 +6,7 @@ import android.net.Uri;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -42,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.edt_loginpass);
         loginButton = findViewById(R.id.btn_login);
 
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +62,11 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
+                                            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                            String currentUserID = mAuth.getCurrentUser().getUid();
                                             // Authentication successful, start the main activity
                                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
+                                            Log.d("hello",currentUserID );
                                             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                                             startActivity(intent);
                                             finish();
@@ -86,45 +91,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void loginUser(String username, String password) {
-//        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
-//        databaseRef.child("User").orderByChild("username").equalTo(username)
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.exists()) {
-//                            for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-//                                String storedPass = String.valueOf(userSnapshot.child("pass").getValue());
-//                                String storedUsername = String.valueOf(userSnapshot.child("username").getValue());
-//                                if (storedPass.equals(password)) {
-//                                    // Login successful
-//                                    // Do something here, like start a new activity or show a message
-//                                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-//                                    startActivity(intent);
-//                                } else {
-//                                    // Password is incorrect
-//                                    // Show a message to the user
-//                                    Toast.makeText(LoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        } else {
-//                            // Username doesn't exist in database
-//                            // Show a message to the user
-//                            Toast.makeText(LoginActivity.this, "Username not found", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        // Handle errors here
-//                    }
-//                });
 
 
 
 
-    }
+
 
 
 

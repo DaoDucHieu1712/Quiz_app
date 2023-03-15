@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,8 +19,16 @@ import com.example.myapplication.model.CourseModel;
 import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -40,8 +51,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
         // Khởi tạo database reference
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         ImageView img_back = findViewById(R.id.img_back);
 
         mTitleEditText = findViewById(R.id.edt_titlequiz);
@@ -58,12 +70,37 @@ public class CreateQuestionActivity extends AppCompatActivity {
         mSaveButton = findViewById(R.id.btn_save);
 
         // Đặt adapter cho Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.course,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCourseSpinner.setAdapter(adapter);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//                this,
+//                R.array.course,
+//                android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mCourseSpinner.setAdapter(adapter);
+
+        DatabaseReference coursesRef = FirebaseDatabase.getInstance().getReference("Courses");
+        Query userCoursesQuery = coursesRef.orderByChild("idUser").equalTo(userId);
+        Log.d("Iduser đang ở đây là", userId);
+        userCoursesQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> courseNames = new ArrayList<>();
+                for (DataSnapshot courseSnapshot : dataSnapshot.getChildren()) {
+                    String courseName = courseSnapshot.child("topic").getValue(String.class);
+                    courseNames.add(courseName);
+                }
+                // Populate the dropdown list with the course names
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateQuestionActivity.this, android.R.layout.simple_spinner_item, courseNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mCourseSpinner.setAdapter(adapter);
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "Error retrieving user courses", databaseError.toException());
+            }
+        });
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
