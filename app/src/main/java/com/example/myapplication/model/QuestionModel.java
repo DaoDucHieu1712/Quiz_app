@@ -8,6 +8,7 @@ public class QuestionModel {
     private String option4;
     private int solution;
     private String course;
+    private String key;
 
     public QuestionModel() {
     }
@@ -20,6 +21,25 @@ public class QuestionModel {
         this.option4 = option4;
         this.solution = solution;
         this.course = course;
+    }
+
+    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String key) {
+        this.title = title;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.solution = solution;
+        this.course = course;
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getTitle() {
