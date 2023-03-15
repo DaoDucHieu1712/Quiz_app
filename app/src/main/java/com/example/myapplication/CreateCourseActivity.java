@@ -149,7 +149,6 @@ public class CreateCourseActivity extends AppCompatActivity {
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();
-      
         List<QuestionModel> listQuestion = new ArrayList<>();
         CourseModel course = new CourseModel(idUser ,topic, title, desc, imageURL, listQuestion);
         //We are changing the child from title to currentDate,
