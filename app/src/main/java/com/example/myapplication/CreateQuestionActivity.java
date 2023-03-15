@@ -15,7 +15,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.myapplication.model.CourseModel;
 import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,7 +41,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private RadioButton mSolution3RadioButton;
     private RadioButton mSolution4RadioButton;
     private Spinner mCourseSpinner;
-    private Button mSaveButton;
+    private Button btn_save;
 
     private DatabaseReference mDatabase;
 
@@ -53,6 +52,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         // Khởi tạo database reference
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ImageView img_back = findViewById(R.id.img_back);
 
@@ -67,7 +67,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         mSolution3RadioButton = findViewById(R.id.solution3);
         mSolution4RadioButton = findViewById(R.id.solution4);
         mCourseSpinner = findViewById(R.id.course_spinner);
-        mSaveButton = findViewById(R.id.btn_save);
+        btn_save = findViewById(R.id.btn_save);
 
         // Đặt adapter cho Spinner
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -94,25 +94,22 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 mCourseSpinner.setAdapter(adapter);
             }
 
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "Error retrieving user courses", databaseError.toException());
             }
         });
 
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
+        btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createQuestion();
             }
         });
 
-        img_back.setOnClickListener(new View.OnClickListener() {
+        img_back.setOnClickListener(new View.OnClickListener() {   // Back before screen
             @Override
             public void onClick(View v) {
-                // Trở về màn hình trước đó
                 finish();
             }
         });
@@ -124,16 +121,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         String option2 = mOption2EditText.getText().toString();
         String option3 = mOption3EditText.getText().toString();
         String option4 = mOption4EditText.getText().toString();
-//        String solution = "";
-//        if (mSolution1RadioButton.isChecked()) {
-//            solution = option1;
-//        } else if (mSolution2RadioButton.isChecked()) {
-//            solution = option2;
-//        } else if (mSolution3RadioButton.isChecked()) {
-//            solution = option3;
-//        } else if (mSolution4RadioButton.isChecked()) {
-//            solution = option4;
-//        }
+
         int solution = -1;
         if (mSolution1RadioButton.isChecked()) {
             solution = 1;
@@ -159,14 +147,17 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
     }
-    
-    private void clearForm() {
+
+    private void clearForm() {   //clear all column of InputForm for next work
         mTitleEditText.setText("");
         mOption1EditText.setText("");
         mOption2EditText.setText("");
         mOption3EditText.setText("");
         mOption4EditText.setText("");
-        mSolution1RadioButton.setChecked(true);
+        mSolution2RadioButton.setChecked(false);
+        mSolution3RadioButton.setChecked(false);
+        mSolution4RadioButton.setChecked(false);
+        mSolution1RadioButton.setChecked(false);
         mCourseSpinner.setSelection(0);
     }
 
