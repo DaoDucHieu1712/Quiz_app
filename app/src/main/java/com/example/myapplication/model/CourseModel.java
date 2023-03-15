@@ -1,6 +1,7 @@
 package com.example.myapplication.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseModel {
     private String idUser;
@@ -9,15 +10,14 @@ public class CourseModel {
     private String desc;
     private String image;
     private String key;
-    private ArrayList<QuestionModel> questions;
+    private List<QuestionModel> questions;
 
-    public CourseModel(String idUser, String topic, String title, String desc, String image, ArrayList<QuestionModel> questions) {
+    public CourseModel(String idUser, String topic, String title, String desc, String image, List<QuestionModel> questions) {
         this.idUser = idUser;
         this.topic = topic;
         this.title = title;
         this.desc = desc;
         this.image = image;
-        this.key = key;
         this.questions = questions;
     }
     public CourseModel(){}
@@ -70,11 +70,11 @@ public class CourseModel {
         this.key = key;
     }
 
-    public ArrayList<QuestionModel> getQuestions() {
+    public List<QuestionModel> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList<QuestionModel> questions) {
+    public void setQuestions(List<QuestionModel> questions) {
         this.questions = questions;
     }
 }
