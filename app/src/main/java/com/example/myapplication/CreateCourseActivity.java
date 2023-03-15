@@ -119,29 +119,6 @@ public class CreateCourseActivity extends AppCompatActivity {
         } else {
             Toast.makeText(CreateCourseActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
         }
-//        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
-//                .child(uri.getLastPathSegment());
-//        AlertDialog.Builder builder = new AlertDialog.Builder(CreateCourseActivity.this);
-//        builder.setCancelable(false);
-//        builder.setView(R.layout.progress_layout);
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-//                while (!uriTask.isComplete());
-//                Uri urlImage = uriTask.getResult();
-//                imageURL = urlImage.toString();
-//                uploadData();
-//                dialog.dismiss();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                dialog.dismiss();
-//            }
-//        });
     }
     public void uploadData(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

@@ -45,7 +45,7 @@ public class HomePageActivity extends AppCompatActivity {
         cv_Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomePageActivity.this,CreateQuestionActivity.class));
+                startActivity(new Intent(HomePageActivity.this,ListCourseActivity.class));
             }
         });
 
