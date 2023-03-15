@@ -2,10 +2,10 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.myapplication.adapter.AdapterClass;
@@ -23,13 +23,13 @@ public class SearchViewActivity extends AppCompatActivity {
     DatabaseReference ref;
     ArrayList<CourseModel> list;
     RecyclerView recyclerView;
-    SearchView searchView;
+    androidx.appcompat.widget.SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
 
-        ref = FirebaseDatabase.getInstance().getReference().child("Courses").child("-NPjRVQu0peFmyLYs_6C");
+        ref = FirebaseDatabase.getInstance().getReference().child("Courses");
         recyclerView = findViewById(R.id.rv);
         searchView = findViewById(R.id.search_view);
     }
@@ -46,8 +46,7 @@ public class SearchViewActivity extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             list.add(ds.getValue(CourseModel.class));
                         }
-                        AdapterClass adapterClass = new AdapterClass(list);
-                        recyclerView.setAdapter(adapterClass);
+
                     }
                 }
 
@@ -60,7 +59,7 @@ public class SearchViewActivity extends AppCompatActivity {
         if(searchView !=null){
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
+                public boolean onQueryTextSubmit(String query) {
                     return false;
                 }
 

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.model.CourseModel;
+import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 
 public class UpdateCourseActivity extends AppCompatActivity {
     ImageView updateImage;
@@ -121,7 +124,8 @@ public class UpdateCourseActivity extends AppCompatActivity {
         String topic = updateTopic.getText().toString().trim();
         String title = updateTitle.getText().toString().trim();
         String desc = updateDesc.getText().toString();
-        CourseModel course = new CourseModel("1",topic, title, desc, imageURL);
+        ArrayList<QuestionModel> questions = new ArrayList<>();
+        CourseModel course = new CourseModel("1",topic, title, desc, imageURL, questions);
         databaseReference.setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

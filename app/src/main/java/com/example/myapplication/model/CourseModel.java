@@ -11,24 +11,23 @@ public class CourseModel {
     private String key;
     private ArrayList<QuestionModel> questions;
 
-    public CourseModel(String idUser, String topic, String title, String desc, String image) {
+    public CourseModel(String idUser, String topic, String title, String desc, String image, ArrayList<QuestionModel> questions) {
         this.idUser = idUser;
         this.topic = topic;
         this.title = title;
         this.desc = desc;
         this.image = image;
-        this.questions = new ArrayList<>();
+        this.key = key;
+        this.questions = questions;
     }
+    public CourseModel(){}
 
-    public CourseModel() {
+    public String getIdUser() {
+        return idUser;
     }
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
-    }
-
-    public String getIdUser() {
-        return idUser;
     }
 
     public String getTopic() {
