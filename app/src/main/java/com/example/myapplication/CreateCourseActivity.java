@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -107,7 +108,10 @@ public class CreateCourseActivity extends AppCompatActivity {
         });
     }
     public void uploadData(){
-        String idUser = "1";
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String currentUserID = mAuth.getCurrentUser().getUid();
+        String idUser = currentUserID;
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();

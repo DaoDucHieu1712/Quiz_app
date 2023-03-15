@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomePageActivity extends AppCompatActivity {
     private CardView cv_logout;
+    private CardView cv_Start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         TextView tv_username = findViewById(R.id.tv_usernameHome);
         cv_logout = findViewById(R.id.cv_logout);
-
+    cv_Start = findViewById(R.id.cvStartQuiz);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
@@ -41,5 +42,13 @@ public class HomePageActivity extends AppCompatActivity {
                 finish();
             }
         });
+        cv_Start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePageActivity.this,CreateQuestionActivity.class));
+            }
+        });
+
+
     }
 }
