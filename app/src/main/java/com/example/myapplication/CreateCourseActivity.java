@@ -33,7 +33,9 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class CreateCourseActivity extends AppCompatActivity {
@@ -126,12 +128,12 @@ public class CreateCourseActivity extends AppCompatActivity {
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();
-        List<QuestionModel> listQuestion = new ArrayList<>();
-        CourseModel course = new CourseModel(idUser ,topic, title, desc, imageURL, listQuestion);
+        Map<String, QuestionModel> questions = new HashMap<>();
+        CourseModel course = new CourseModel(idUser ,topic, title, desc, imageURL, questions);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Courses").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Courses").push()
                 .setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

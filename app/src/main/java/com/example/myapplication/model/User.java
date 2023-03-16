@@ -1,24 +1,37 @@
 package com.example.myapplication.model;
 
 import java.util.Date;
+import java.util.Map;
 
 public class User {
     private String username;
     private String pass;
     private String fullName;
     private String image;
+    private String Key;
     private Date dob;
     private boolean gender;
-    private CourseModel course;
+    private Map<String, CourseModel> courses;
 
-    public User(String username, String pass, String fullName, String image, Date dob, boolean gender, CourseModel course) {
+    public User(String key, String username, String pass, String fullName, String image, Date dob, boolean gender, Map<String, CourseModel>  courses) {
+        this.username = username;
+        this.pass = pass;
+        this.fullName = fullName;
+        this.image = image;
+        Key = key;
+        this.dob = dob;
+        this.gender = gender;
+        this.courses = courses;
+    }
+
+    public User(String username, String pass, String fullName, String image, Date dob, boolean gender, Map<String, CourseModel>  courses) {
         this.username = username;
         this.pass = pass;
         this.fullName = fullName;
         this.image = image;
         this.dob = dob;
         this.gender = gender;
-        this.course = course;
+        this.courses = courses;
     }
 
     public User(String username, String pass, String fullName, Date dob) {
@@ -28,6 +41,14 @@ public class User {
         this.dob = dob;
     }
     public User() {
+    }
+
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String key) {
+        Key = key;
     }
 
     public String getUsername() {
@@ -78,11 +99,11 @@ public class User {
         this.gender = gender;
     }
 
-    public CourseModel getCourse() {
-        return course;
+    public Map<String, CourseModel> getCourses() {
+        return courses;
     }
 
-    public void setCourse(CourseModel course) {
-        this.course = course;
+    public void setCourses(Map<String, CourseModel> courses) {
+        this.courses = courses;
     }
 }
