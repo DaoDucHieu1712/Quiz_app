@@ -15,9 +15,11 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.myapplication.model.CourseModel;
 import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +29,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -52,6 +56,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         // Khởi tạo database reference
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
+        String courseId = getIntent().getExtras().getString("courseId");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ImageView img_back = findViewById(R.id.img_back);
@@ -69,14 +74,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         mCourseSpinner = findViewById(R.id.course_spinner);
         btn_save = findViewById(R.id.btn_save);
 
-        // Đặt adapter cho Spinner
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//                this,
-//                R.array.course,
-//                android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        mCourseSpinner.setAdapter(adapter);
-
         DatabaseReference coursesRef = FirebaseDatabase.getInstance().getReference("Courses");
         Query userCoursesQuery = coursesRef.orderByChild("idUser").equalTo(userId);
         Log.d("Iduser đang ở đây là", userId);
@@ -93,7 +90,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mCourseSpinner.setAdapter(adapter);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "Error retrieving user courses", databaseError.toException());
@@ -103,7 +99,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createQuestion();
+                if(validateInputs()){
+                    createQuestion(courseId);
+                }
             }
         });
 
@@ -115,7 +113,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         });
     }
 
-    private void createQuestion() {
+    private void createQuestion(String courseId) {
         String title = mTitleEditText.getText().toString();
         String option1 = mOption1EditText.getText().toString();
         String option2 = mOption2EditText.getText().toString();
@@ -134,7 +132,13 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
         String course = mCourseSpinner.getSelectedItem().toString();
         QuestionModel question = new QuestionModel(title, option1, option2, option3, option4, solution, course);
-        mDatabase.child("questions").push().setValue(question).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+//        DatabaseReference courses = mDatabase.child("Courses").child(courseId);
+//        Map<String, QuestionModel> childUpdates = new HashMap<>();
+//        childUpdates.put("questions", question);
+//        courses.push().setValue(childUpdates);
+
+        mDatabase.child("Courses").child(courseId).child("questions").push().setValue(question).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(CreateQuestionActivity.this, "Question created successfully", Toast.LENGTH_SHORT).show();
@@ -146,6 +150,52 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 Toast.makeText(CreateQuestionActivity.this, "Error creating question", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public boolean validateInputs() {    //check input Create Form
+        EditText edtTitleQuiz = findViewById(R.id.edt_titlequiz);
+        EditText op1 = findViewById(R.id.op1);
+        EditText op2 = findViewById(R.id.op2);
+        EditText op3 = findViewById(R.id.op3);
+        EditText op4 = findViewById(R.id.op4);
+        RadioButton solution1 = findViewById(R.id.solution1);
+        RadioButton solution2 = findViewById(R.id.solution2);
+        RadioButton solution3 = findViewById(R.id.solution3);
+        RadioButton solution4 = findViewById(R.id.solution4);
+        Spinner courseSpinner = findViewById(R.id.course_spinner);
+
+        if (edtTitleQuiz.getText().toString().isEmpty()) {
+            edtTitleQuiz.setError("Please enter your question");
+            return false;
+        }
+
+        if (op1.getText().toString().isEmpty()) {
+            op1.setError("Please enter option 1");
+            return false;
+        }
+        if (op2.getText().toString().isEmpty()) {
+            op2.setError("Please enter option 2");
+            return false;
+        }
+        if (op3.getText().toString().isEmpty()) {
+            op3.setError("Please enter option 3");
+            return false;
+        }
+        if (op4.getText().toString().isEmpty()) {
+            op4.setError("Please enter option 4");
+            return false;
+        }
+
+        if (!solution1.isChecked() && !solution2.isChecked() && !solution3.isChecked() && !solution4.isChecked()) {
+            Toast.makeText(getApplicationContext(), "Please select correct answer", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (courseSpinner.getSelectedItem().toString().equals("Select Course")) {
+            Toast.makeText(getApplicationContext(), "Please select course", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void clearForm() {   //clear all column of InputForm for next work

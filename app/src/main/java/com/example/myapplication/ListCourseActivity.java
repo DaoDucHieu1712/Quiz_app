@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCourseActivity extends AppCompatActivity {
-FloatingActionButton fab;
-RecyclerView courseListRV;
-List<CourseModel> listCourse;
-DatabaseReference databaseReference;
-ValueEventListener eventListener;
-CourseAdapter adapter;
+    FloatingActionButton fab;
+    RecyclerView courseListRV;
+    List<CourseModel> listCourse;
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
+    CourseAdapter adapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String idUser = mAuth.getCurrentUser().getUid();
     @Override
