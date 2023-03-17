@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.CourseAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +30,9 @@ public class FragmentCourse extends Fragment {
     private CourseAdapter adapter;
     private DatabaseReference databaseRef;
     List<CourseModel> courses = new ArrayList<>();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String idUser = mAuth.getCurrentUser().getUid();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,20 +53,19 @@ public class FragmentCourse extends Fragment {
 
         databaseRef = FirebaseDatabase.getInstance().getReference("Courses");
         databaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 courses.clear();
-
-                for (DataSnapshot courseSnapshot : dataSnapshot.getChildren()) {
-                    CourseModel course = courseSnapshot.getValue(CourseModel.class);
-                    courses.add(course);
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                    CourseModel courseModel = itemSnapshot.getValue(CourseModel.class);
+                    courseModel.setKey(itemSnapshot.getKey());
+                    if(courseModel.getIdUser().equals(idUser)){
+                        courses.add(courseModel);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
@@ -81,24 +84,6 @@ public class FragmentCourse extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // Add a listener for the Firebase database reference
-        databaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                courses.clear();
-
-                for (DataSnapshot courseSnapshot : dataSnapshot.getChildren()) {
-                    CourseModel course = courseSnapshot.getValue(CourseModel.class);
-                    courses.add(course);
-                }
-
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
     }
 
 }

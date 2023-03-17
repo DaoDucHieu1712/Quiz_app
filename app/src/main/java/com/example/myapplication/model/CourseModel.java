@@ -1,6 +1,8 @@
 package com.example.myapplication.model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CourseModel {
     private String idUser;
@@ -9,9 +11,9 @@ public class CourseModel {
     private String desc;
     private String image;
     private String key;
-    private ArrayList<QuestionModel> questions;
+    private Map<String, QuestionModel> questions;
 
-    public CourseModel(String idUser, String topic, String title, String desc, String image, ArrayList<QuestionModel> questions) {
+    public CourseModel(String idUser, String topic, String title, String desc, String image, String key, Map<String, QuestionModel> questions) {
         this.idUser = idUser;
         this.topic = topic;
         this.title = title;
@@ -20,6 +22,24 @@ public class CourseModel {
         this.key = key;
         this.questions = questions;
     }
+
+    public CourseModel(String idUser, String topic, String title, String desc, String image, Map<String, QuestionModel> questions) {
+        this.idUser = idUser;
+        this.topic = topic;
+        this.title = title;
+        this.desc = desc;
+        this.image = image;
+        this.questions = questions;
+    }
+
+    public Map<String, QuestionModel> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Map<String, QuestionModel> questions) {
+        this.questions = questions;
+    }
+
     public CourseModel(){}
 
     public String getIdUser() {
@@ -68,13 +88,5 @@ public class CourseModel {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public ArrayList<QuestionModel> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(ArrayList<QuestionModel> questions) {
-        this.questions = questions;
     }
 }

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +33,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class UpdateCourseActivity extends AppCompatActivity {
     ImageView updateImage;
@@ -97,35 +101,46 @@ public class UpdateCourseActivity extends AppCompatActivity {
         });
     }
     public void saveData(){
-        storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(uri.getLastPathSegment());
-        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateCourseActivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                updateData();
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+        if (updateTitle.getText().toString().isEmpty() ||
+                updateTopic.getText().toString().isEmpty() ||
+                updateDesc.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
+            return;
+        } if (uri == null) {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+            storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(uri.getLastPathSegment());
+            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateCourseActivity.this);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    imageURL = urlImage.toString();
+                    updateData();
+                    dialog.dismiss();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
+                }
+            });
     }
     public void updateData(){
         String topic = updateTopic.getText().toString().trim();
         String title = updateTitle.getText().toString().trim();
-        String desc = updateDesc.getText().toString();
-        ArrayList<QuestionModel> questions = new ArrayList<>();
-        CourseModel course = new CourseModel("1",topic, title, desc, imageURL, questions);
+        String desc = updateDesc.getText().toString().trim();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String idUser = mAuth.getCurrentUser().getUid();
+        Map<String, QuestionModel> questions = new HashMap<>();
+        CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL, questions);
         databaseReference.setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

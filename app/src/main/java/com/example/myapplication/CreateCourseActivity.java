@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,6 +33,9 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class CreateCourseActivity extends AppCompatActivity {
@@ -82,41 +86,54 @@ public class CreateCourseActivity extends AppCompatActivity {
         });
     }
     public void saveData(){
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
-                .child(uri.getLastPathSegment());
-        AlertDialog.Builder builder = new AlertDialog.Builder(CreateCourseActivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                uploadData();
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+        if (uploadTitle.getText().toString().isEmpty() ||
+                uploadTopic.getText().toString().isEmpty() ||
+                uploadDesc.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (uri != null) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                    .child("Android Images").child(uri.getLastPathSegment());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreateCourseActivity.this);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    imageURL = urlImage.toString();
+                    uploadData();
+                    dialog.dismiss();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            Toast.makeText(CreateCourseActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
+        }
     }
     public void uploadData(){
-        String idUser = "1";
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String idUser = mAuth.getCurrentUser().getUid();
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String topic = uploadTitle.getText().toString();
-        ArrayList<QuestionModel> listQuestion = new ArrayList<QuestionModel>();
-        CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL, listQuestion);
+        Map<String, QuestionModel> questions = new HashMap<>();
+        CourseModel course = new CourseModel(idUser ,topic, title, desc, imageURL, questions);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Courses").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Courses").push()
                 .setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

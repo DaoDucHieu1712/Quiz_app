@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     FloatingActionButton deleteButton, editButton;
     String key = "";
     String imgUrl = "";
+    Button listquestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         detailImage = findViewById(R.id.detailImage);
         deleteButton=findViewById(R.id.deleteCourse);
         editButton=findViewById(R.id.updateCourse);
+        listquestion = findViewById(R.id.list_course_button);
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             detailDesc.setText(bundle.getString("Description"));
@@ -73,6 +76,15 @@ public class CourseDetailActivity extends AppCompatActivity {
                         .putExtra("Title", detailTitle.getText().toString())
                         .putExtra("Topic", detailTopic.getText().toString())
                         .putExtra("Key", key);
+                startActivity(intent);
+            }
+        });
+
+        listquestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseDetailActivity.this, ListQuestion.class)
+                        .putExtra("courseId", key);
                 startActivity(intent);
             }
         });

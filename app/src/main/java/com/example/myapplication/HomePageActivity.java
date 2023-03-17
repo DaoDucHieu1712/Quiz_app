@@ -6,13 +6,19 @@ import androidx.cardview.widget.CardView;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomePageActivity extends AppCompatActivity {
     private CardView cv_logout;
+    private CardView cv_Start;
+    private CardView cv_question;
+    private ImageView img_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +26,15 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         TextView tv_username = findViewById(R.id.tv_usernameHome);
         cv_logout = findViewById(R.id.cv_logout);
+        cv_Start = findViewById(R.id.cvStartQuiz);
+        cv_question = findViewById(R.id.cvHistory);
+        img_profile = findViewById(R.id.img_profile);
+
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        System.out.println(firebaseUser);
 
         if (firebaseUser != null) {
             String emailUser = firebaseUser.getEmail();
@@ -41,5 +53,27 @@ public class HomePageActivity extends AppCompatActivity {
                 finish();
             }
         });
+        cv_Start.setOnClickListener(new View.OnClickListener() {   //button: Cac hoc phan
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePageActivity.this,ListCourseActivity.class));
+            }
+        });
+        cv_question.setOnClickListener(new View.OnClickListener() {    //button: Lop Hoc
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePageActivity.this,ListQuestion.class));
+            }
+        });
+
+        img_profile.setOnClickListener(new View.OnClickListener() {    //img view profile
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePageActivity.this, ProfileActivity.class));
+            }
+        });
+
+
+
     }
 }
