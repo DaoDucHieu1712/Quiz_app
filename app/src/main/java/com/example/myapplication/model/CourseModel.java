@@ -23,6 +23,15 @@ public class CourseModel {
         this.questions = questions;
     }
 
+    public CourseModel(String idUser, String topic, String title, String desc, String image, Map<String, QuestionModel> questions) {
+        this.idUser = idUser;
+        this.topic = topic;
+        this.title = title;
+        this.desc = desc;
+        this.image = image;
+        this.questions = questions;
+    }
+
     public Map<String, QuestionModel> getQuestions() {
         return questions;
     }

@@ -33,7 +33,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UpdateCourseActivity extends AppCompatActivity {
     ImageView updateImage;
@@ -137,7 +139,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
         String desc = updateDesc.getText().toString().trim();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String idUser = mAuth.getCurrentUser().getUid();
-        List<QuestionModel> questions = new ArrayList<>();
+        Map<String, QuestionModel> questions = new HashMap<>();
         CourseModel course = new CourseModel(idUser,topic, title, desc, imageURL, questions);
         databaseReference.setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
