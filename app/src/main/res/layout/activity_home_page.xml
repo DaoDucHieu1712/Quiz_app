@@ -21,6 +21,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:src="@drawable/ic_profile"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_logo"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/tv_usernameHome"
         android:layout_width="wrap_content"

@@ -19,6 +19,7 @@ import com.example.myapplication.model.CourseModel;
 import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private RadioButton mSolution3RadioButton;
     private RadioButton mSolution4RadioButton;
     private Spinner mCourseSpinner;
-    private Button mSaveButton;
+    private Button btn_save;
 
     private DatabaseReference mDatabase;
 
@@ -53,6 +56,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         // Khởi tạo database reference
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
+        String courseId = getIntent().getExtras().getString("courseId");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ImageView img_back = findViewById(R.id.img_back);
 
@@ -67,15 +72,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         mSolution3RadioButton = findViewById(R.id.solution3);
         mSolution4RadioButton = findViewById(R.id.solution4);
         mCourseSpinner = findViewById(R.id.course_spinner);
-        mSaveButton = findViewById(R.id.btn_save);
-
-        // Đặt adapter cho Spinner
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//                this,
-//                R.array.course,
-//                android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        mCourseSpinner.setAdapter(adapter);
+        btn_save = findViewById(R.id.btn_save);
 
         DatabaseReference coursesRef = FirebaseDatabase.getInstance().getReference("Courses");
         Query userCoursesQuery = coursesRef.orderByChild("idUser").equalTo(userId);
@@ -93,47 +90,36 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mCourseSpinner.setAdapter(adapter);
             }
-
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "Error retrieving user courses", databaseError.toException());
             }
         });
 
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
+        btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createQuestion();
+                if(validateInputs()){
+                    createQuestion(courseId);
+                }
             }
         });
 
-        img_back.setOnClickListener(new View.OnClickListener() {
+        img_back.setOnClickListener(new View.OnClickListener() {   // Back before screen
             @Override
             public void onClick(View v) {
-                // Trở về màn hình trước đó
                 finish();
             }
         });
     }
 
-    private void createQuestion() {
+    private void createQuestion(String courseId) {
         String title = mTitleEditText.getText().toString();
         String option1 = mOption1EditText.getText().toString();
         String option2 = mOption2EditText.getText().toString();
         String option3 = mOption3EditText.getText().toString();
         String option4 = mOption4EditText.getText().toString();
-//        String solution = "";
-//        if (mSolution1RadioButton.isChecked()) {
-//            solution = option1;
-//        } else if (mSolution2RadioButton.isChecked()) {
-//            solution = option2;
-//        } else if (mSolution3RadioButton.isChecked()) {
-//            solution = option3;
-//        } else if (mSolution4RadioButton.isChecked()) {
-//            solution = option4;
-//        }
+
         int solution = -1;
         if (mSolution1RadioButton.isChecked()) {
             solution = 1;
@@ -146,7 +132,13 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
         String course = mCourseSpinner.getSelectedItem().toString();
         QuestionModel question = new QuestionModel(title, option1, option2, option3, option4, solution, course);
-        mDatabase.child("questions").push().setValue(question).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+//        DatabaseReference courses = mDatabase.child("Courses").child(courseId);
+//        Map<String, QuestionModel> childUpdates = new HashMap<>();
+//        childUpdates.put("questions", question);
+//        courses.push().setValue(childUpdates);
+
+        mDatabase.child("Courses").child(courseId).child("questions").push().setValue(question).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(CreateQuestionActivity.this, "Question created successfully", Toast.LENGTH_SHORT).show();
@@ -159,14 +151,63 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
     }
-    
-    private void clearForm() {
+
+    public boolean validateInputs() {    //check input Create Form
+        EditText edtTitleQuiz = findViewById(R.id.edt_titlequiz);
+        EditText op1 = findViewById(R.id.op1);
+        EditText op2 = findViewById(R.id.op2);
+        EditText op3 = findViewById(R.id.op3);
+        EditText op4 = findViewById(R.id.op4);
+        RadioButton solution1 = findViewById(R.id.solution1);
+        RadioButton solution2 = findViewById(R.id.solution2);
+        RadioButton solution3 = findViewById(R.id.solution3);
+        RadioButton solution4 = findViewById(R.id.solution4);
+        Spinner courseSpinner = findViewById(R.id.course_spinner);
+
+        if (edtTitleQuiz.getText().toString().isEmpty()) {
+            edtTitleQuiz.setError("Please enter your question");
+            return false;
+        }
+
+        if (op1.getText().toString().isEmpty()) {
+            op1.setError("Please enter option 1");
+            return false;
+        }
+        if (op2.getText().toString().isEmpty()) {
+            op2.setError("Please enter option 2");
+            return false;
+        }
+        if (op3.getText().toString().isEmpty()) {
+            op3.setError("Please enter option 3");
+            return false;
+        }
+        if (op4.getText().toString().isEmpty()) {
+            op4.setError("Please enter option 4");
+            return false;
+        }
+
+        if (!solution1.isChecked() && !solution2.isChecked() && !solution3.isChecked() && !solution4.isChecked()) {
+            Toast.makeText(getApplicationContext(), "Please select correct answer", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (courseSpinner.getSelectedItem().toString().equals("Select Course")) {
+            Toast.makeText(getApplicationContext(), "Please select course", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void clearForm() {   //clear all column of InputForm for next work
         mTitleEditText.setText("");
         mOption1EditText.setText("");
         mOption2EditText.setText("");
         mOption3EditText.setText("");
         mOption4EditText.setText("");
-        mSolution1RadioButton.setChecked(true);
+        mSolution2RadioButton.setChecked(false);
+        mSolution3RadioButton.setChecked(false);
+        mSolution4RadioButton.setChecked(false);
+        mSolution1RadioButton.setChecked(false);
         mCourseSpinner.setSelection(0);
     }
 

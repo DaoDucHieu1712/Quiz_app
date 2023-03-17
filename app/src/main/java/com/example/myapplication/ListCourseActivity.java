@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.myapplication.adapter.CourseAdapter;
 import com.example.myapplication.model.CourseModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,12 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCourseActivity extends AppCompatActivity {
-FloatingActionButton fab;
-RecyclerView courseListRV;
-List<CourseModel> listCourse;
-DatabaseReference databaseReference;
-ValueEventListener eventListener;
-CourseAdapter adapter;
+    FloatingActionButton fab;
+    RecyclerView courseListRV;
+    List<CourseModel> listCourse;
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
+    CourseAdapter adapter;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String idUser = mAuth.getCurrentUser().getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +63,10 @@ CourseAdapter adapter;
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     CourseModel courseModel = itemSnapshot.getValue(CourseModel.class);
                     courseModel.setKey(itemSnapshot.getKey());
-                    listCourse.add(courseModel);
-                    System.out.println(itemSnapshot.getKey());
+                    if(courseModel.getIdUser().equals(idUser)){
+                        listCourse.add(courseModel);
+                        System.out.println(itemSnapshot.getKey());
+                    }
                 }
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();

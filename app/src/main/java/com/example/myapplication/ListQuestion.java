@@ -31,11 +31,13 @@ public class ListQuestion extends AppCompatActivity {
     QuestionAdapter questionAdapter;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
+    String key="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_question);
+        key = getIntent().getExtras().getString("courseId");
 
 
         fab = findViewById(R.id.fab);
@@ -77,7 +79,8 @@ public class ListQuestion extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListQuestion.this, CreateQuestionActivity.class);
+                Intent intent = new Intent(ListQuestion.this, CreateQuestionActivity.class)
+                        .putExtra("courseId", key);
                 startActivity(intent);
             }
         });
