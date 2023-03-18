@@ -9,6 +9,7 @@ public class QuestionModel {
     private int solution;
     private String course;
     private String key;
+    private int userSelectAnswer;
 
     public QuestionModel() {
     }
@@ -21,6 +22,7 @@ public class QuestionModel {
         this.option4 = option4;
         this.solution = solution;
         this.course = course;
+        this.userSelectAnswer = 0;
     }
 
     public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String key) {
@@ -32,6 +34,7 @@ public class QuestionModel {
         this.solution = solution;
         this.course = course;
         this.key = key;
+        this.userSelectAnswer = 0;
     }
 
     public String getKey() {
@@ -96,5 +99,13 @@ public class QuestionModel {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public int getUserSelectAnswer() {
+        return userSelectAnswer;
+    }
+
+    public void setUserSelectAnswer(int userSelectAnswer) {
+        this.userSelectAnswer = userSelectAnswer;
     }
 }
