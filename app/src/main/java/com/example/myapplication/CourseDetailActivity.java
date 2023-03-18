@@ -94,7 +94,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseDetailActivity.this, LearnActivity.class));
+                startActivity(new Intent(CourseDetailActivity.this, LearnActivity.class).putExtra("courseId", key));
             }
         });
     }
