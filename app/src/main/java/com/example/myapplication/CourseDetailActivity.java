@@ -24,7 +24,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     FloatingActionButton deleteButton, editButton;
     String key = "";
     String imgUrl = "";
-    Button listquestion;
+    Button listquestion, startQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class CourseDetailActivity extends AppCompatActivity {
         deleteButton=findViewById(R.id.deleteCourse);
         editButton=findViewById(R.id.updateCourse);
         listquestion = findViewById(R.id.list_course_button);
+        startQuiz = findViewById(R.id.learn_question_button);
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             detailDesc.setText(bundle.getString("Description"));
@@ -86,6 +88,13 @@ public class CourseDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(CourseDetailActivity.this, ListQuestion.class)
                         .putExtra("courseId", key);
                 startActivity(intent);
+            }
+        });
+
+        startQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseDetailActivity.this, LearnActivity.class));
             }
         });
     }
