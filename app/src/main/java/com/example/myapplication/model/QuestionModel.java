@@ -1,6 +1,8 @@
 package com.example.myapplication.model;
 
-public class QuestionModel {
+import java.io.Serializable;
+
+public class QuestionModel implements Serializable {
     private String title;
     private String option1;
     private String option2;
@@ -35,17 +37,17 @@ public class QuestionModel {
         this.userSelectAnswer = 0;
     }
 
-    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String key) {
-        this.title = title;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.solution = solution;
-        this.course = course;
-        this.key = key;
-        this.userSelectAnswer = 0;
-    }
+//    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String key) {
+//        this.title = title;
+//        this.option1 = option1;
+//        this.option2 = option2;
+//        this.option3 = option3;
+//        this.option4 = option4;
+//        this.solution = solution;
+//        this.course = course;
+//        this.key = key;
+//        this.userSelectAnswer = 0;
+//    }
 
     public String getKey() {
         return key;
