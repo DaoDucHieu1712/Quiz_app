@@ -9,61 +9,62 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="138dp"
             android:background="@drawable/blue_bg">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="103dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/quizlet_logo" />
         </FrameLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="62dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="62dp"
-            android:layout_marginTop="37dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
             <EditText
-                android:id="@+id/edt_dob"
+                android:id="@+id/edt_fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Seclect your brith date"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="20dp"
+                android:hint="Enter your full name"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="16sp"
-                android:drawableLeft="@drawable/ic_baseline_date_range_24"
-                android:drawablePadding="20dp"/>
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="62dp"
-            android:layout_marginRight="62dp"
             android:layout_marginTop="13dp"
+            android:layout_marginRight="62dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
             <EditText
-                android:id="@+id/edt_fullname"
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="20dp"
-                android:hint="Enter your name"
+                android:hint="Enter your mail"
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
@@ -77,33 +78,65 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="62dp"
-            android:layout_marginRight="62dp"
             android:layout_marginTop="13dp"
+            android:layout_marginRight="62dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
             <EditText
-                android:id="@+id/edt_email"
+                android:id="@+id/edt_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="example@email.com"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:drawablePadding="20dp"
+                android:hint="Enter your date of birth"
+                android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="16sp"
-                android:drawableLeft="@drawable/ic_baseline_email_24"
-                android:drawablePadding="20dp"
-                android:inputType="text"/>
+                android:textSize="16sp" />
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="62dp"
-            android:layout_marginRight="62dp"
             android:layout_marginTop="13dp"
+            android:layout_marginRight="62dp">
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Female"
+                    android:textSize="16sp" />
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="62dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
             <EditText
@@ -111,18 +144,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="20dp"
                 android:hint="Create your own password"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="16sp"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="20dp"
-                android:inputType="textPassword"/>
+                android:textSize="16sp" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <EditText
+                android:id="@+id/edt_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="20dp"
+                android:hint="Confirm your password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="16sp" />
+        </RelativeLayout>
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
@@ -137,7 +194,8 @@
             android:paddingBottom="14dp"
             android:text="SIGN UP"
             android:textColor="#FFF"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/loginRedirectText"
             android:layout_width="wrap_content"
@@ -146,7 +204,7 @@
             android:layout_marginTop="12dp"
             android:text="Already an user? Login"
             android:textColor="#1566e0"
-            android:textSize="14.5sp"/>
+            android:textSize="14.5sp" />
 
     </LinearLayout>
 

@@ -34,12 +34,14 @@ public class User {
         this.courses = courses;
     }
 
-    public User(String username, String pass, String fullName, Date dob) {
+    public User(String username, String pass, String fullName, Date dob, boolean gender) {
         this.username = username;
         this.pass = pass;
         this.fullName = fullName;
         this.dob = dob;
+        this.gender = gender;
     }
+
     public User() {
     }
 
