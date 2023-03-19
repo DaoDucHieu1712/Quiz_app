@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateQuestionActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/blue_bg">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_back"/>
+
+        <ImageView
+            android:id="@+id/img_createQues"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="290dp"
+            android:src="@drawable/ic_createquestion"/>
+
+        <TextView
+            android:id="@+id/tv_createQues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="45dp"
+            android:text="CREATE \nQUESTION"
+            android:textColor="@color/white"
+            android:textSize="37dp"
+            android:textStyle="italic|bold"/>
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/update_titlequiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/update_op1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/update_op2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/update_op3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/update_op4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:minHeight="48dp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp">
+
+                <RadioButton
+                    android:id="@+id/update_solution1"
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="option1"
+                    />
+
+                <RadioButton
+                    android:id="@+id/update_solution2"
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="option2" />
+
+                <RadioButton
+                    android:id="@+id/update_solution3"
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="option3" />
+
+                <RadioButton
+                    android:id="@+id/update_solution4"
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="option4" />
+            </LinearLayout>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/update_question"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#255AC5"
+            android:text="Update"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+
+</LinearLayout>
+
