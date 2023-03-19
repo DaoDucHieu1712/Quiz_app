@@ -59,12 +59,12 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(new Intent(HomePageActivity.this,ListCourseActivity.class));
             }
         });
-        cv_question.setOnClickListener(new View.OnClickListener() {    //button: Lop Hoc
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomePageActivity.this,ListQuestion.class));
-            }
-        });
+//        cv_question.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(HomePageActivity.this,ListQuestion.class));
+//            }
+//        });
 
         img_profile.setOnClickListener(new View.OnClickListener() {    //img view profile
             @Override

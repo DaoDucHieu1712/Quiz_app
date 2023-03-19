@@ -21,7 +21,7 @@
             android:layout_alignParentBottom="true">
 
             <TextView
-                android:id="@+id/tv_numQuestion"
+                android:id="@+id/currentQuestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Question 1"
@@ -29,6 +29,7 @@
                 android:textSize="32sp"/>
 
             <TextView
+                android:id="@+id/totalQuestionTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/10"
