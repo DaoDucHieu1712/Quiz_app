@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
    private EditText username, password;
    private Button loginButton;
+   TextView registerRedirect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.edt_loginusn);
         password = findViewById(R.id.edt_loginpass);
         loginButton = findViewById(R.id.btn_login);
+        registerRedirect = findViewById(R.id.textRegisterRedirect);
 
 
 
@@ -86,6 +89,13 @@ public class LoginActivity extends AppCompatActivity {
                     username.setError("Please enter valid email.");
                 }
 
+            }
+        });
+        registerRedirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
