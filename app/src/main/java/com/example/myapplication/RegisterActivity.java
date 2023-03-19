@@ -84,13 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String textFullName = editTextName.getText().toString();
                 String textEmail = exitTextEmail.getText().toString();
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                Date textDob = null;
-                try {
-                    textDob = format.parse(editTextDob.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                String textDob = editTextDob.getText().toString();
                 String textPwd = editTextPassword.getText().toString();
                 String textConfirm = editTextConfirmPass.getText().toString();
                 String textGender;
@@ -106,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"Please re-enter your mail", Toast.LENGTH_SHORT).show();
                     exitTextEmail.setError("Invalid email");
                     exitTextEmail.requestFocus();
-                } else if (TextUtils.isEmpty((CharSequence) textDob)){
+                } else if (TextUtils.isEmpty(textDob)){
                     Toast.makeText(RegisterActivity.this,"Please enter your dob", Toast.LENGTH_SHORT).show();
                     editTextDob.setError("Dob is required");
                     editTextDob.requestFocus();
@@ -132,10 +126,17 @@ public class RegisterActivity extends AppCompatActivity {
                     editTextConfirmPass.requestFocus();
                     editTextPassword.clearComposingText();
                     editTextConfirmPass.clearComposingText();
-                } else{
+                } else {
                     textGender = radioButtonSelected.getText().toString();
                     boolean gen = "Male".equals(textGender);
-                    registerUser(textFullName, textEmail, textDob, gen, textPwd);
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                    Date dateBirth = null;
+                    try {
+                        dateBirth = format.parse(textDob);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    registerUser(textFullName, textEmail, dateBirth, gen, textPwd);
                 }
 
             }
