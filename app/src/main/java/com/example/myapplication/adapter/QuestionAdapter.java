@@ -1,6 +1,7 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.QuestionDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.QuestionModel;
 
@@ -42,7 +44,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.questionCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, QuestionDetailActivity.class);
+                intent.putExtra("quizTitle", questionList.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("op1", questionList.get(holder.getAdapterPosition()).getOption1());
+                intent.putExtra("op2", questionList.get(holder.getAdapterPosition()).getOption2());
+                intent.putExtra("op3", questionList.get(holder.getAdapterPosition()).getOption3());
+                intent.putExtra("op4", questionList.get(holder.getAdapterPosition()).getOption4());
+                intent.putExtra("solution", questionList.get(holder.getAdapterPosition()).getSolution());
+                intent.putExtra("course", questionList.get(holder.getAdapterPosition()).getCourse());
+                intent.putExtra("key", questionList.get(holder.getAdapterPosition()).getKey());
+                context.startActivity(intent);
             }
         });
     }

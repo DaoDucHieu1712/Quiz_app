@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionDetailActivity"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+
+
+    <TextView
+        android:id="@+id/detail_quizTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Quiz: What is ABCDASDFASDFASDFASD ? "
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:id="@+id/detail_op1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A : 2142314124"
+        android:layout_marginBottom="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/detail_op2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B: asdfsadfsadf"
+        android:layout_marginBottom="15dp"
+
+        />
+    <TextView
+        android:id="@+id/detail_op3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C: 1238u12nsaj"
+        android:layout_marginBottom="15dp"
+
+        />
+    <TextView
+        android:id="@+id/detail_op4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D: asfsa1294 sfsda"
+        android:layout_marginBottom="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/detail_solution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solution : A"
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:menu_fab_size="normal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            app:menu_colorPressed="@color/blue"
+            app:menu_colorNormal="@color/blue"
+            app:menu_icon="@drawable/ic_baseline_menu_24"
+            app:menu_openDirection="up"
+            app:menu_labels_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_list"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:fab_showShadow="true"
+                app:fab_colorNormal="@color/green"
+                app:fab_size="mini"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/updateQuestion"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:fab_showShadow="true"
+                app:fab_colorNormal="@color/green"
+                app:fab_size="mini"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteQuestion"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:fab_showShadow="true"
+                app:fab_colorNormal="@color/red"
+                app:fab_size="mini"/>
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/list_course_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="56dp"
+        android:backgroundTint="#00BCD4"
+        android:elevation="4dp"
+        android:text="List Question "
+        android:textSize="16dp"
+        android:textColor="#EDEFF1" />
+
+    <Button
+        android:id="@+id/learn_question_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="56dp"
+        android:backgroundTint="#1164E1"
+        android:elevation="4dp"
+        android:text="Start Quiz "
+        android:textColor="#EDEFF1"
+        android:textSize="16dp" />
+
+</LinearLayout>

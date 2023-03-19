@@ -54,7 +54,7 @@ public class ListQuestion extends AppCompatActivity {
         listQuestion = new ArrayList<>();
 
         questionAdapter = new QuestionAdapter(ListQuestion.this, listQuestion);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Questions");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Courses").child(key).child("questions");
         dialog.show();
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
