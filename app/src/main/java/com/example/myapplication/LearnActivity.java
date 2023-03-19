@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
@@ -39,7 +41,7 @@ public class LearnActivity extends AppCompatActivity {
     private TextView currentQuestion;
     private TextView questionTV;
 
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private final List<QuestionModel> questionModelList = new ArrayList<>();
 
     private CountDownTimer countDownTimer;
@@ -51,7 +53,7 @@ public class LearnActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
         String courseId = getIntent().getExtras().getString("courseId");
-//        System.out.println("----------" + courseId);
+//
 
         quizTime = findViewById(R.id.quizTimer);
 
@@ -81,36 +83,65 @@ public class LearnActivity extends AppCompatActivity {
         intructionsDialog.setCancelable(false);
         intructionsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         intructionsDialog.show();
+      // replace with the ID of the course you want to retrieve questions for
+        DatabaseReference questionsRef = FirebaseDatabase.getInstance().getReference("Courses").child(courseId).child("questions");
 
-        databaseReference.child("Courses").child(courseId).child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
+        questionsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<QuestionModel> questionList = new ArrayList<>();
+
+//                final int QuizTime = Integer.parseInt(dataSnapshot.child("time").getValue(String.class));
                 final int QuizTime = 120;
 
-                for(DataSnapshot question : snapshot.child("questions").getChildren()){
-                    String getQuestion = question.child("title").getValue(String.class);
-                    String getOption1 = question.child("option1").getValue(String.class);
-                    String getOption2 = question.child("option2").getValue(String.class);
-                    String getOption3 = question.child("option3").getValue(String.class);
-                    String getOption4 = question.child("option4").getValue(String.class);
-                    int getAnswer = Integer.parseInt(question.child("solution").getValue(String.class));
+                for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
+//                    QuestionModel question = questionSnapshot.getValue(QuestionModel.class);
+                    String getQuestion = questionSnapshot.child("title").getValue(String.class);
+                    String getOption1 = questionSnapshot.child("option1").getValue(String.class);
+                    String getOption2 = questionSnapshot.child("option2").getValue(String.class);
+                    String getOption3 = questionSnapshot.child("option3").getValue(String.class);
+                    String getOption4 = questionSnapshot.child("option4").getValue(String.class);
+                    int getAnswer =  questionSnapshot.child("solution").getValue(Integer.class);
 
                     QuestionModel questionModel = new QuestionModel(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
-                    questionModelList.add(questionModel);
+                    if (questionModel != null) {
+                        questionModelList.add(questionModel);
+                    }
+                }
+                for (int i = 0; i < questionModelList.size(); i++) {
+                    QuestionModel question = questionModelList.get(i);
+                    System.out.println("Question " + (i + 1) + ": " + question.getTitle());
+                    System.out.println("Option 1: " + question.getOption1());
+                    System.out.println("Option 2: " + question.getOption2());
+                    System.out.println("Option 3: " + question.getOption3());
+                    System.out.println("Option 4: " + question.getOption4());
+                    System.out.println("Answer: " + question.getSolution());
                 }
 
+                currentQuestion.setText("Question" +String.valueOf(currentQuestionPosition + 1));
+                questionTV.setText(questionModelList.get(currentQuestionPosition).getTitle());
+
+                // set the options text and icons for the current question
+                option1TV.setText(questionModelList.get(currentQuestionPosition).getOption1());
+                option2TV.setText(questionModelList.get(currentQuestionPosition).getOption2());
+                option3TV.setText(questionModelList.get(currentQuestionPosition).getOption3());
+                option4TV.setText(questionModelList.get(currentQuestionPosition).getOption4());
+
+                // use the questionList as needed
+
                 //setting total Question to TextView
-                totalQuestionTV.setText("/" + questionModelList.size());
-                // start quiz with time max
+              totalQuestionTV.setText("/" + questionModelList.size());
+               // start quiz with time max
                 startQuizTime(QuizTime);
-                //select first question by default
-                selectQuestion(currentQuestionPosition);
+//                //select first question by default if the list is not empty
+                if (!questionList.isEmpty()) {
+                   selectQuestion(currentQuestionPosition);
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LearnActivity.this, "Failed to get data from firebase",
-                        Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // handle errors here
             }
         });
 
@@ -187,7 +218,6 @@ public class LearnActivity extends AppCompatActivity {
                         getSecond - TimeUnit.MINUTES.toSeconds(getMinute));
                 quizTime.setText(generateTime);
             }
-
             @Override
             public void onFinish() {
                 finishQuiz();
@@ -196,23 +226,34 @@ public class LearnActivity extends AppCompatActivity {
         countDownTimer.start();
     }
 
-    private void selectQuestion(int questionListPostion){
+    private void selectQuestion(int position) {
         resetOption();
-        questionTV.setText(questionModelList.get(questionListPostion).getTitle());
-        option1TV.setText(questionModelList.get(questionListPostion).getOption1());
-        option2TV.setText(questionModelList.get(questionListPostion).getOption2());
-        option3TV.setText(questionModelList.get(questionListPostion).getOption3());
-        option4TV.setText(questionModelList.get(questionListPostion).getOption4());
+        QuestionModel questionModel = questionModelList.get(position);
+        currentQuestionPosition = position;
 
-        currentQuestion.setText("Question" + (questionListPostion + 1));
+        questionTV.setText(questionModel.getTitle());
+        option1TV.setText(questionModel.getOption1());
+        option2TV.setText(questionModel.getOption2());
+        option3TV.setText(questionModel.getOption3());
+        option4TV.setText(questionModel.getOption4());
+
+        currentQuestion.setText("Question" +String.valueOf(currentQuestionPosition + 1));
     }
 
-    private void resetOption(){
-        option1Layout.setBackgroundResource(R.drawable.round_back_white50_10);
-        option2Layout.setBackgroundResource(R.drawable.round_back_white50_10);
-        option3Layout.setBackgroundResource(R.drawable.round_back_white50_10);
-        option4Layout.setBackgroundResource(R.drawable.round_back_white50_10);
+//    private void selectQuestion(int questionListPostion){
+//        resetOption();
+//        if (questionModelList.size() > questionListPostion) {
+//            questionTV.setText(questionModelList.get(questionListPostion).getTitle());
+//            option1TV.setText(questionModelList.get(questionListPostion).getOption1());
+//            option2TV.setText(questionModelList.get(questionListPostion).getOption2());
+//            option3TV.setText(questionModelList.get(questionListPostion).getOption3());
+//            option4TV.setText(questionModelList.get(questionListPostion).getOption4());
+//
+//            currentQuestion.setText("Question" + (questionListPostion + 1));
+//        }
+//    }
 
+    private void resetOption(){
         option1Icon.setImageResource(R.drawable.round_back_white50_100);
         option2Icon.setImageResource(R.drawable.round_back_white50_100);
         option3Icon.setImageResource(R.drawable.round_back_white50_100);
