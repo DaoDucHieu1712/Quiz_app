@@ -1,17 +1,26 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.example.myapplication.model.QuestionModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 
 public class UpdateQuestionActivity extends AppCompatActivity {
 
     EditText quiztitle, op1, op2, op3, op4;
     RadioButton so1, so2, so3, so4;
     Button btn_update;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +33,72 @@ public class UpdateQuestionActivity extends AppCompatActivity {
         op4 = findViewById(R.id.update_op4);
         so1 = findViewById(R.id.update_solution1);
         so2 = findViewById(R.id.update_solution2);
-        so2 = findViewById(R.id.update_solution3);
-        so3 = findViewById(R.id.update_solution4);
+        so3 = findViewById(R.id.update_solution3);
+        so4 = findViewById(R.id.update_solution4);
         btn_update = findViewById(R.id.update_question);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            quiztitle.setText(bundle.getString("quiztitle"));
+            op1.setText(bundle.getString("op1"));
+            op2.setText(bundle.getString("op2"));
+            op3.setText(bundle.getString("op3"));
+            op4.setText(bundle.getString("op4"));
+            String solution = bundle.get("solution").toString();
+            switch (solution){
+                case "1":
+                    so1.isChecked();
+                    break;
+                case "2":
+                    so2.isChecked();
+                    break;
+                case "3":
+                    so3.isChecked();
+                    break;
+                case "4":
+                    so4.isChecked();
+                    break;
+            }
+        }
+
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quiztitle.getText().toString().isEmpty() ||
+                        op1.getText().toString().isEmpty() ||
+                        op2.getText().toString().isEmpty() ||
+                        op3.getText().toString().isEmpty() ||
+                        op4.getText().toString().isEmpty()) {
+                    Toast.makeText(UpdateQuestionActivity.this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String _quiztitle = quiztitle.getText().toString().trim();
+                String _op1 = op1.getText().toString().trim();
+                String _op2 = op2.getText().toString().trim();
+                String _op3 = op3.getText().toString().trim();
+                String _op4 = op4.getText().toString().trim();
+                String solution = "";
+                if(so1.isChecked()){
+                    solution = "1";
+                }else if(so2.isChecked()){
+                    solution = "2";
+                }else if(so3.isChecked()){
+                    solution = "3";
+                }else if(so4.isChecked()){
+                    solution = "4";
+                }
+                QuestionModel questionSave = new QuestionModel(_quiztitle, _op1, _op2, _op3, _op4, Integer.parseInt(solution));
+                databaseReference.setValue(questionSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(UpdateQuestionActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                });
+            }
+        });
 
     }
 }
