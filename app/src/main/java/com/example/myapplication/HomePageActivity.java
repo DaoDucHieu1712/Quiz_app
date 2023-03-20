@@ -18,6 +18,8 @@ public class HomePageActivity extends AppCompatActivity {
     private CardView cv_logout;
     private CardView cv_Start;
     private CardView cv_question;
+    private CardView cv_search;
+
     private ImageView img_profile;
 
     @Override
@@ -29,6 +31,7 @@ public class HomePageActivity extends AppCompatActivity {
         cv_Start = findViewById(R.id.cvStartQuiz);
         cv_question = findViewById(R.id.cvHistory);
         img_profile = findViewById(R.id.img_profile);
+        cv_search = findViewById(R.id.cvRule);
 
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -73,6 +76,12 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        cv_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePageActivity.this, SearchViewActivity.class));
+            }
+        });
 
 
     }
