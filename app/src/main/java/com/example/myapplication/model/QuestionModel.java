@@ -11,9 +11,30 @@ public class QuestionModel implements Serializable {
     private int solution;
     private String course;
     private String key;
+    private String courseId;
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
     private int userSelectAnswer;
 
     public QuestionModel() {
+    }
+
+    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String courseId) {
+        this.title = title;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.solution = solution;
+        this.course = course;
+        this.courseId = courseId;
     }
 
     public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course) {

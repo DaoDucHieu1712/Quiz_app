@@ -56,25 +56,6 @@
             android:text="Soulution : D"
             />
 
-        <LinearLayout
-            android:layout_width="402dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btn_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete" />
-
-            <Button
-                android:id="@+id/btn_update"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Update" />
-        </LinearLayout>
-
     </LinearLayout>
 
 

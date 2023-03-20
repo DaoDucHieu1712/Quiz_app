@@ -53,6 +53,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 intent.putExtra("solution", questionList.get(holder.getAdapterPosition()).getSolution());
                 intent.putExtra("course", questionList.get(holder.getAdapterPosition()).getCourse());
                 intent.putExtra("key", questionList.get(holder.getAdapterPosition()).getKey());
+                intent.putExtra("courseId", questionList.get(holder.getAdapterPosition()).getCourseId());
                 context.startActivity(intent);
             }
         });

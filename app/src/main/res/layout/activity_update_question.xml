@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="45dp"
-            android:text="CREATE \nQUESTION"
+            android:text="UPDATE \nQUESTION"
             android:textColor="@color/white"
             android:textSize="37dp"
             android:textStyle="italic|bold"/>
@@ -83,7 +83,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:id="@+id/update_solution"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
