@@ -37,17 +37,6 @@ public class QuestionModel implements Serializable {
         this.courseId = courseId;
     }
 
-    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course) {
-        this.title = title;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.solution = solution;
-        this.course = course;
-        this.userSelectAnswer = 0;
-    }
-
     public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution) {
         this.title = title;
         this.option1 = option1;
@@ -55,20 +44,7 @@ public class QuestionModel implements Serializable {
         this.option3 = option3;
         this.option4 = option4;
         this.solution = solution;
-        this.userSelectAnswer = 0;
     }
-
-//    public QuestionModel(String title, String option1, String option2, String option3, String option4, int solution, String course, String key) {
-//        this.title = title;
-//        this.option1 = option1;
-//        this.option2 = option2;
-//        this.option3 = option3;
-//        this.option4 = option4;
-//        this.solution = solution;
-//        this.course = course;
-//        this.key = key;
-//        this.userSelectAnswer = 0;
-//    }
 
     public String getKey() {
         return key;

@@ -98,9 +98,13 @@ public class UpdateQuestionActivity extends AppCompatActivity {
                     solution = "4";
                 }
 
-                QuestionModel questionSave = new QuestionModel(_quiztitle, _op1, _op2, _op3, _op4, Integer.parseInt(solution), courseId);
+                QuestionModel questionSave = new QuestionModel(_quiztitle, _op1, _op2, _op3, _op4, Integer.parseInt(solution));
+                Map<String, Object> valueSave = new HashMap<>();
+                valueSave.put(key, questionSave);
+
                 databaseReference =  FirebaseDatabase.getInstance().getReference("Courses").child(courseId).child("questions");
-                databaseReference.setValue(questionSave);
+                databaseReference.setValue(valueSave);
+
                 Toast.makeText(UpdateQuestionActivity.this, "Updated", Toast.LENGTH_SHORT).show();
 
             }

@@ -34,18 +34,18 @@ public class ListQuestion extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     String key="";
+    String course_title="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_question);
         key = getIntent().getExtras().getString("courseId");
-        System.out.println("key : " + key);
-
+        course_title = getIntent().getExtras().getString("title");
         fab = findViewById(R.id.fab);
         course_name = findViewById(R.id.course_name);
         listQuestionRv = findViewById(R.id.listQuestion);
-        course_name.setText(key);
+        course_name.setText(course_title);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ListQuestion.this, 1);
         listQuestionRv.setLayoutManager(gridLayoutManager);
