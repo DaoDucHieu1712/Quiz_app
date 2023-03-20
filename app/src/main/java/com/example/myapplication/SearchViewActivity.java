@@ -76,7 +76,7 @@ public class SearchViewActivity extends AppCompatActivity {
         ArrayList<CourseModel> myList = new ArrayList<>();
         for(CourseModel courseModel: list)
         {
-            if(courseModel.getTopic().toLowerCase().contains(str.toLowerCase())){
+            if(courseModel.getTitle().toLowerCase().contains(str.toLowerCase())){
                 myList.add(courseModel);
             }
         }
