@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.model.CourseModel;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,12 @@ public class CourseDetailActivity extends AppCompatActivity {
             Glide.with(this) .load(bundle.getString("Image")).into(detailImage);
         }
 
+        CourseModel courseModel = (CourseModel) getIntent().getSerializableExtra("my_object");
+        if(courseModel!=null){
+            detailDesc.setText(courseModel.getDesc());
+            detailTitle.setText(courseModel.getTitle());
+            detailTopic.setText(courseModel.getTopic());
+        }
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
