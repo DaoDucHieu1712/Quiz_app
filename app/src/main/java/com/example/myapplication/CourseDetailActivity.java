@@ -86,7 +86,8 @@ public class CourseDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CourseDetailActivity.this, ListQuestion.class)
-                        .putExtra("courseId", key);
+                        .putExtra("courseId", key)
+                        .putExtra("title", detailTitle.getText().toString());
                 startActivity(intent);
             }
         });
