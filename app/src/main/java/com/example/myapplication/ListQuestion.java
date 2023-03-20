@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.myapplication.adapter.CourseAdapter;
 import com.example.myapplication.adapter.QuestionAdapter;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListQuestion extends AppCompatActivity {
+    TextView course_name;
     FloatingActionButton fab;
     RecyclerView listQuestionRv;
     List<QuestionModel> listQuestion;
@@ -38,10 +40,12 @@ public class ListQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_question);
         key = getIntent().getExtras().getString("courseId");
-
+        System.out.println("key : " + key);
 
         fab = findViewById(R.id.fab);
+        course_name = findViewById(R.id.course_name);
         listQuestionRv = findViewById(R.id.listQuestion);
+        course_name.setText(key);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ListQuestion.this, 1);
         listQuestionRv.setLayoutManager(gridLayoutManager);
@@ -54,6 +58,7 @@ public class ListQuestion extends AppCompatActivity {
         listQuestion = new ArrayList<>();
 
         questionAdapter = new QuestionAdapter(ListQuestion.this, listQuestion);
+        listQuestionRv.setAdapter(questionAdapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("Courses").child(key).child("questions");
         dialog.show();
 
@@ -64,9 +69,10 @@ public class ListQuestion extends AppCompatActivity {
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     QuestionModel questionModel = itemSnapshot.getValue(QuestionModel.class);
                     questionModel.setKey(itemSnapshot.getKey());
+                    questionModel.setCourseId(key);
                     listQuestion.add(questionModel);
-                    System.out.println(itemSnapshot.getKey());
                 }
+                System.out.println(listQuestion);
                 questionAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }

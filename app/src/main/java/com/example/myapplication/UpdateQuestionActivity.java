@@ -14,13 +14,21 @@ import com.example.myapplication.model.QuestionModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateQuestionActivity extends AppCompatActivity {
 
     EditText quiztitle, op1, op2, op3, op4;
     RadioButton so1, so2, so3, so4;
     Button btn_update;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    String key = "";
+    String courseId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,19 +52,21 @@ public class UpdateQuestionActivity extends AppCompatActivity {
             op2.setText(bundle.getString("op2"));
             op3.setText(bundle.getString("op3"));
             op4.setText(bundle.getString("op4"));
-            String solution = bundle.get("solution").toString();
+            String solution = bundle.getString("solution");
+            key = bundle.getString("key");
+            courseId = bundle.getString("courseId");
             switch (solution){
                 case "1":
-                    so1.isChecked();
+                    so1.setChecked(true);
                     break;
                 case "2":
-                    so2.isChecked();
+                    so2.setChecked(true);
                     break;
                 case "3":
-                    so3.isChecked();
+                    so3.setChecked(true);
                     break;
                 case "4":
-                    so4.isChecked();
+                    so4.setChecked(true);
                     break;
             }
         }
@@ -87,16 +97,12 @@ public class UpdateQuestionActivity extends AppCompatActivity {
                 }else if(so4.isChecked()){
                     solution = "4";
                 }
-                QuestionModel questionSave = new QuestionModel(_quiztitle, _op1, _op2, _op3, _op4, Integer.parseInt(solution));
-                databaseReference.setValue(questionSave).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(UpdateQuestionActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-                });
+
+                QuestionModel questionSave = new QuestionModel(_quiztitle, _op1, _op2, _op3, _op4, Integer.parseInt(solution), courseId);
+                databaseReference =  FirebaseDatabase.getInstance().getReference("Courses").child(courseId).child("questions");
+                databaseReference.setValue(questionSave);
+                Toast.makeText(UpdateQuestionActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+
             }
         });
 

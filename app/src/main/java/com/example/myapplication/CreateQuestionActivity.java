@@ -119,7 +119,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         String option2 = mOption2EditText.getText().toString();
         String option3 = mOption3EditText.getText().toString();
         String option4 = mOption4EditText.getText().toString();
-
         int solution = -1;
         if (mSolution1RadioButton.isChecked()) {
             solution = 1;
@@ -131,7 +130,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             solution = 4;
         }
         String course = mCourseSpinner.getSelectedItem().toString();
-        QuestionModel question = new QuestionModel(title, option1, option2, option3, option4, solution, course);
+        QuestionModel question = new QuestionModel(title, option1, option2, option3, option4, solution, course, courseId);
 
 //        DatabaseReference courses = mDatabase.child("Courses").child(courseId);
 //        Map<String, QuestionModel> childUpdates = new HashMap<>();

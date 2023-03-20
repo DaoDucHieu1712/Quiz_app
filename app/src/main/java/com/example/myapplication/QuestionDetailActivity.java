@@ -16,6 +16,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
     TextView quizTilte, op1, op2, op3, op4 , solution;
     FloatingActionButton deleteButton, editButton, listButton;
+    String courseId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +32,21 @@ public class QuestionDetailActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.deleteQuestion);
         editButton = findViewById(R.id.updateQuestion);
         listButton = findViewById(R.id.back_list);
-
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-            quizTilte.setText(bundle.getString("quiztitle"));
+            quizTilte.setText(bundle.getString("quizTitle"));
             op1.setText(bundle.getString("op1"));
             op2.setText(bundle.getString("op2"));
             op3.setText(bundle.getString("op3"));
             op4.setText(bundle.getString("op4"));
             solution.setText(bundle.getString("solution"));
+            courseId = bundle.getString("courseId");
         }
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Courses").child(bundle.getString("key")).child("questions");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Courses").child(courseId).child("questions");
                 reference.child(bundle.getString("key")).removeValue();
                 Toast.makeText(QuestionDetailActivity.this, "Delete successful !!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), ListQuestion.class));
@@ -59,11 +60,12 @@ public class QuestionDetailActivity extends AppCompatActivity {
                Intent intent = new Intent(QuestionDetailActivity.this, UpdateQuestionActivity.class)
                        .putExtra("quiztitle", quizTilte.getText().toString())
                        .putExtra("op1", op1.getText().toString())
-                       .putExtra("op2", op1.getText().toString())
-                       .putExtra("op3", op1.getText().toString())
-                       .putExtra("op4", op1.getText().toString())
+                       .putExtra("op2", op2.getText().toString())
+                       .putExtra("op3", op3.getText().toString())
+                       .putExtra("op4", op4.getText().toString())
                        .putExtra("solution", solution.getText().toString())
-                       .putExtra("key", bundle.getString("key"));
+                       .putExtra("key", bundle.getString("key"))
+                       .putExtra("courseId", bundle.getString("courseId"));
                startActivity(intent);
            }
        });
@@ -71,7 +73,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionDetailActivity.this, ListQuestion.class)
-                        .putExtra("courseId", bundle.getString("key"));
+                        .putExtra("courseId", courseId);
                 startActivity(intent);
             }
         });
