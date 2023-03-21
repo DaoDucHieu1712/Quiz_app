@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class  FragmentProfile extends Fragment {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
-    TextView text;
+    TextView full_name, user_name, gender;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String idUser = mAuth.getCurrentUser().getUid();
     @Nullable
@@ -32,7 +32,10 @@ public class  FragmentProfile extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        text = view.findViewById(R.id.text);
+        full_name = view.findViewById(R.id.full_name);
+        user_name = view.findViewById(R.id.user_name);
+        gender = view.findViewById(R.id.gender);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("User");
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -42,7 +45,10 @@ public class  FragmentProfile extends Fragment {
                     String userKey = itemSnapshot.getKey();
                     if (userKey.equals(idUser)) {
                         User currentUser = itemSnapshot.getValue(User.class);
-                        text.setText(currentUser.getFullName());
+                        full_name.setText("Full Name : " + currentUser.getFullName());
+                        user_name.setText("User Name : " + currentUser.getUsername());
+                        gender.setText("Gender : " + currentUser.isGender());
+
                         break; // exit the loop once the current user is found
                     }
                 }
